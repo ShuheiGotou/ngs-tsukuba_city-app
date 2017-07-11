@@ -12,6 +12,7 @@
           <div class="comment">
               <p>{{ problemComment }}</p>
           </div>
+          <div class="latlon">{{ problemLatLon }}</div>
           <div class="date">{{ problemDate }}</div>
         </div>
       </el-col>
@@ -40,6 +41,16 @@ export default {
       const regExp = new RegExp('T', 'g');
       const date = this.problem.created_at.replace(regExp, ' ').split('.');
       return date[0];
+    },
+    problemLatLon() {
+      // const google_link = 'https://google.co.jp/maps/search/'
+      let lat = 'no data';
+      let lon = 'no data';
+      if (this.problem.latitude !== null && this.problem.longitude !== null) {
+        lat = this.problem.latitude.toFixed(3);
+        lon = this.problem.longitude.toFixed(3);
+      }
+      return `lat: ${lat},  lon: ${lon} `;
     },
   },
 };
@@ -88,6 +99,12 @@ export default {
   flex-grow: 1;
   /*text-align: right;*/
   font-size: x-small;
+  color: #aaaaaa;
+}
+.latlon {
+  flex-grow: 1;
+  /*text-align: right;*/
+  font-size: small;
   color: #aaaaaa;
 }
 p {

@@ -1,6 +1,9 @@
 <template>
-  <div class="">
-    <h1>困りごとの一覧ページ</h1>
+  <div>
+    <h1>
+      困りごとの一覧ページ
+      <small>つくば市職員が閲覧するページ</small>
+    </h1>
   <!-- <p>{{ msg }}</p>     -->
     <ul class="card-list">
       <li v-for="problem in problems">
@@ -46,5 +49,8 @@ export default {
   list-style-type: none;
   padding-bottom: 100px;
   width: 50%;
+}
+small {
+  color: #aaaaaa;
 }
 </style>
