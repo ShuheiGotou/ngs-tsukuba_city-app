@@ -17,6 +17,7 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    <el-date-picker v-model="datetime" type="datetime" placeholder="日時を選択してください"></el-date-picker>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
+      datetime: '',
     };
   },
 };
