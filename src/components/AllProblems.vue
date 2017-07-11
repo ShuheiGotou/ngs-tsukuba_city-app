@@ -4,8 +4,7 @@
   <!-- <p>{{ msg }}</p>     -->
     <ul class="card-list">
       <li v-for="problem in problems">
-        <!-- <problem-card :problem="problem" class="card"></problem-card> -->
-        <p>{{ problem.comment }}</p>
+        <problem-card :problem="problem" class="card"></problem-card>
       </li>
     </ul>
   </div>
@@ -14,9 +13,13 @@
 <script>
 import axios from 'axios';
 import { WEB_API_URL, TOKEN } from './../../.env';
+import ProblemCard from './ProblemCard.vue';
 
 export default {
   name: 'all-problems',
+  components: {
+    ProblemCard,
+  },
   data() {
     return {
       problems: '',
