@@ -1,16 +1,22 @@
 <template>
-  <div>
-      <div class="thumbnail">
-        <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
-        <img src="../assets/logo.png" v-else>
-      </div>
-      <div class="content">
+  <el-card class="box-card">
+    <el-row>
+      <el-col :span='8'>
+        <div class="thumbnail">
+          <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
+          <img src="../assets/logo.png" v-else>
+        </div>
+      </el-col>
+      <el-col :span='16'>
+        <div class="content">
           <div class="comment">
-              <p>{{problem.comment}}</p>
+              <p>{{ problemComment }}</p>
           </div>
-          <div class="date">{{problem.created_at}}</div>
-      </div>
-  </div>
+          <div class="date">{{ problemDate }}</div>
+        </div>
+      </el-col>
+    </el-row>
+  </el-card>
 </template>
 
 <script>
@@ -25,18 +31,25 @@ export default {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
     },
+    problemComment() {
+      const limit = 256;
+      const trimText = `${this.problem.comment.substr(0, limit)}...`;
+      return this.problem.comment.length > limit ? trimText : this.problem.comment;
+    },
+    problemDate() {
+      const regExp = new RegExp('T', 'g');
+      const date = this.problem.created_at.replace(regExp, ' ').split('.');
+      return date[0];
+    },
   },
 };
 </script>
 
 <style scoped>
-v-ons-card {
-  position: relative;
-  display: flex;
-}
 .thumbnail {
   position: relative;
-  width: 40%;
+  width: 65%;
+  text-align: center;
 }
 .thumbnail:before {
     content: "";
@@ -54,26 +67,28 @@ v-ons-card {
 .content {
   display: flex;
   flex-direction: column;
-  width: 60%;
-  padding: 0 10px;
+  width: 100%;
   text-align: left;
+  overflow: hidden;
 }
 .comment {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /*align-items: center;*/
+  /*justify-content: center;*/
   flex-grow: 9;
   color: #7f7f7f;
 }
+.comment p {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
 .date {
   flex-grow: 1;
-  text-align: right;
+  /*text-align: right;*/
   font-size: x-small;
   color: #aaaaaa;
-}
-.cover {
-  width: 100%;
-  height: 100%;
 }
 p {
   padding: 0.5em 0;
@@ -83,10 +98,11 @@ p {
 img {
   width: 100%;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 5px;
 }
-v-ons-card {
-  background: rgba(1,168,236,0.1);
-  border-radius: 20px;
+.box-card {
+  margin-bottom: 20px;
+  /*position: relative;
+  display: flex;*/
 }
 </style>

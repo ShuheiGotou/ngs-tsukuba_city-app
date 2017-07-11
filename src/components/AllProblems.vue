@@ -39,5 +39,12 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style>
+.card-list {
+  margin: auto;
+  padding: 0;
+  list-style-type: none;
+  padding-bottom: 100px;
+  width: 50%;
+}
 </style>
