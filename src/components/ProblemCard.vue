@@ -13,6 +13,7 @@
               <p>{{ problemComment }}</p>
           </div>
           <div class="latlon">{{ problemLatLon }}</div>
+          <div class="latlon" v-if="!!googleMapLink"><a v-bind:href="googleMapLink" target="_blank"> -> check map </a></div>
           <div class="date">{{ problemDate }}</div>
         </div>
       </el-col>
@@ -33,6 +34,9 @@ export default {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
     },
     problemComment() {
+      if (this.problem.comment.length === 0) {
+        return 'No comment';
+      }
       const limit = 256;
       const trimText = `${this.problem.comment.substr(0, limit)}...`;
       return this.problem.comment.length > limit ? trimText : this.problem.comment;
@@ -43,7 +47,6 @@ export default {
       return date[0];
     },
     problemLatLon() {
-      // const google_link = 'https://google.co.jp/maps/search/'
       let lat = 'no data';
       let lon = 'no data';
       if (this.problem.latitude !== null && this.problem.longitude !== null) {
@@ -51,6 +54,13 @@ export default {
         lon = this.problem.longitude.toFixed(3);
       }
       return `lat: ${lat},  lon: ${lon} `;
+    },
+    googleMapLink() {
+      const GoogleMapLink = 'https://google.co.jp/maps/search/';
+      if (this.problem.latitude !== null && this.problem.longitude !== null) {
+        return `${GoogleMapLink + this.problem.latitude}+${this.problem.longitude}`;
+      }
+      return null;
     },
   },
 };
@@ -96,13 +106,16 @@ export default {
   word-break: break-all;
 }
 .date {
-  flex-grow: 1;
   /*text-align: right;*/
   font-size: x-small;
   color: #aaaaaa;
 }
 .latlon {
-  flex-grow: 1;
+  /*text-align: right;*/
+  font-size: small;
+  color: #aaaaaa;
+}
+.map {
   /*text-align: right;*/
   font-size: small;
   color: #aaaaaa;
