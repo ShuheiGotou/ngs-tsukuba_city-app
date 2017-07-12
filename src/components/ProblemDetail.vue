@@ -34,7 +34,6 @@ export default {
     axios.get(`${WEB_API_URL}/v1/problems/${problemId}`, config)
             .then((response) => {
               this.problem = response.data;
-              console.log(this.problem);
             }).catch(() => {
             });
   },

@@ -35,7 +35,6 @@ export default {
     axios.get(`${WEB_API_URL}/v1/problems`, config)
             .then((response) => {
               this.problems = response.data;
-              console.log(this.problems);
             }).catch(() => {
             });
   },
