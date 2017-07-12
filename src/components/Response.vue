@@ -1,27 +1,25 @@
+
 <template>
   <div>
     <h1>
-      困りごとの一覧ページ
+      返答ページ
       <small>つくば市職員が閲覧するページ</small>
     </h1>
-    <!-- <router-view></router-view> -->
   <!-- <p>{{ msg }}</p>     -->
     <ul class="card-list">
-      <li v-for="problem in problems" @click="toProblemDetail(problem)">
+      <li v-for="problem in problems">
         <problem-card :problem="problem" class="card"></problem-card>
       </li>
     </ul>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
 import { WEB_API_URL, TOKEN } from './../../.env';
 import ProblemCard from './ProblemCard.vue';
-import router from '../router';
 
 export default {
-  name: 'all-problems',
+  name: 'response-page',
   components: {
     ProblemCard,
   },
@@ -40,11 +38,6 @@ export default {
               console.log(this.problems);
             }).catch(() => {
             });
-  },
-  methods: {
-    toProblemDetail(problem) {
-      router.push({ name: 'problem-detail', params: { id: problem.id } });
-    },
   },
 };
 </script>
