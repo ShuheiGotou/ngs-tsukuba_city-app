@@ -4,7 +4,7 @@
       <el-col :span='8'>
         <div class="thumbnail">
           <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
-          <img src="../assets/logo.png" v-else>
+          <img src="../assets/noimage.jpg" v-else>
         </div>
       </el-col>
       <el-col :span='16'>
