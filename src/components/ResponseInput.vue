@@ -1,10 +1,10 @@
 <template>
   <div class="input-area">
     <el-input
-    type="textarea"
-    :autosize="{ minRows: 3 }"
-    placeholder="Please input"
-    v-model="replyComment">
+      type="textarea"
+      :autosize="{ minRows: 3 }"
+      placeholder="Please input"
+      v-model="replyComment">
     </el-input>
     <el-button type="primary" class="reply-button" @click="postResponse">Send Reply</el-button>
   </div>
@@ -36,6 +36,7 @@ export default {
               .then((response) => {
                 console.log(response);
                 this.replyComment = '';
+                this.$message('Response done.');
               }).catch(() => {
               });
     },
@@ -49,7 +50,6 @@ export default {
   width: 50%;
 }
 .reply-button {
-  margin-left: auto;
   margin-top: 10px;
 }
 </style>

@@ -13,7 +13,9 @@
               <p>{{ problemComment }}</p>
           </div>
           <div class="latlon">{{ problemLatLon }}</div>
-          <div class="latlon" v-if="!!googleMapLink"><a v-bind:href="googleMapLink" target="_blank"> -> check map </a></div>
+          <div class="map" v-if="!!googleMapLink">
+            <a v-bind:href="googleMapLink" target="_blank"> -> check map </a>
+          </div>
           <div class="date">{{ problemDate }}</div>
         </div>
       </el-col>

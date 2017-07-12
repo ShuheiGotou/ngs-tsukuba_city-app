@@ -4,8 +4,6 @@
       困りごとの一覧ページ
       <small>つくば市職員が閲覧するページ</small>
     </h1>
-    <!-- <router-view></router-view> -->
-  <!-- <p>{{ msg }}</p>     -->
     <ul class="card-list">
       <li v-for="problem in problems" @click="toProblemDetail(problem)">
         <problem-card :problem="problem" class="card"></problem-card>
@@ -16,9 +14,9 @@
 
 <script>
 import axios from 'axios';
+import router from '../router';
 import { WEB_API_URL, TOKEN } from './../../.env';
 import ProblemCard from './ProblemCard.vue';
-import router from '../router';
 
 export default {
   name: 'all-problems',
