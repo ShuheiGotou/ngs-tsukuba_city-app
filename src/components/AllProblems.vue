@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card-list {
   margin: auto;
   padding: 0;

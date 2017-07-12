@@ -5,6 +5,7 @@
       <small>（詳細ページ）</small>
     </h1>
     <problem-detail-card :problem="problem"></problem-detail-card>
+    <response-input :problem="problem"></response-input>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import axios from 'axios';
 import { WEB_API_URL, TOKEN } from '../../.env';
 import ProblemDetailCard from './ProblemDetailCard.vue';
+import ResponseInput from './ResponseInput.vue';
 
 export default {
   name: 'problem-detail',
@@ -22,6 +24,7 @@ export default {
   },
   components: {
     ProblemDetailCard,
+    ResponseInput,
   },
   created() {
     const config = {
@@ -38,5 +41,5 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style scoped>
 </style>

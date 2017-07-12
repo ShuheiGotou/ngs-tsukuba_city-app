@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="box">
     <el-card class="box-card">
       <el-row>
         <el-col :span='12' :offset='6'>
@@ -16,7 +16,7 @@
       </el-row>
       <el-row>
         <el-col :span='12' :offset='6'>
-          {{ problem.id }}
+          <div class="date">{{ problemDate }}</div>
         </el-col>
       </el-row>
     </el-card>
@@ -36,16 +36,24 @@ export default {
     imageUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
     },
+    problemDate() {
+      const regExp = new RegExp('T', 'g');
+      const date = this.problem.created_at.replace(regExp, ' ').split('.');
+      return date[0];
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 img {
   width: 300px;
 }
 .box-card {
   margin: auto;
   width: 50%;
+}
+.box {
+  margin-bottom: 20px;
 }
 </style>
