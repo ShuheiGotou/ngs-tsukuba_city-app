@@ -27,7 +27,7 @@ export default new Router({
       // ],
     },
     {
-      path: ':id',
+      path: '/problms/:id',
       name: 'problem-detail',
       component: ProblemDetail,
     },
