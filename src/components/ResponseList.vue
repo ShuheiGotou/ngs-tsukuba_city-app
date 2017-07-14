@@ -1,6 +1,6 @@
 <template>
-  <div class="box">
-    <small>レスポンスのリスト</small>
+  <div class="box" v-if="responses.length > 0">
+    <small>Responses list</small>
     <el-card class="box-card">
       <ul class="card-list">
         <li v-for="response in responses">
@@ -8,6 +8,9 @@
         </li>
       </ul>
     </el-card>
+  </div>
+  <div class="box" v-else>
+    <small>no-responses</small>
   </div>
 </template>
 
@@ -17,14 +20,15 @@ import { WEB_API_URL, TOKEN } from '../../.env';
 
 export default {
   name: 'response-list',
-  props: [
-    'responses',
-  ],
+  data() {
+    return {
+      responses: '',
+    };
+  },
   created() {
     const config = {
       headers: { Authorization: TOKEN },
     };
-    console.log(this.problem);
     const problemId = this.$route.params.id;
     axios.get(`${WEB_API_URL}/v1/problems/${problemId}/responses`, config)
             .then((response) => {
