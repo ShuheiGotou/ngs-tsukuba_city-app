@@ -1,5 +1,7 @@
 <template>
   <el-card class="box-card">
+    <el-badge value="返信してください！" class="item" v-if="true"></el-badge>
+    <el-badge hidden v-else ></el-badge>
     <el-row>
       <el-col :span='8'>
         <div class="thumbnail">
@@ -136,5 +138,8 @@ img {
   margin-bottom: 20px;
   /*position: relative;
   display: flex;*/
+}
+.item {
+  float: right;
 }
 </style>
