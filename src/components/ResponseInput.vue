@@ -36,8 +36,14 @@ export default {
               .then((response) => {
                 console.log(response);
                 this.replyComment = '';
-                this.$message('Response done.');
+                this.$message({
+                  message: '返答を送信しました．',
+                  type: 'success',
+                });
               }).catch(() => {
+                this.$alert('送信できませんでした．ネットワークを確認してください．', 'ネットワークエラー', {
+                  confirmButtonText: 'OK',
+                });
               });
     },
   },

@@ -29,18 +29,33 @@ export default {
     };
   },
   created() {
-    const config = {
-      headers: { Authorization: TOKEN },
-    };
-    axios.get(`${WEB_API_URL}/v1/problems`, config)
-            .then((response) => {
-              this.problems = response.data;
-            }).catch(() => {
-            });
+    this.getResponses();
   },
   methods: {
     toProblemDetail(problem) {
       router.push({ name: 'problem-detail', params: { id: problem.id } });
+    },
+    getResponses() {
+      const config = {
+        headers: { Authorization: TOKEN },
+      };
+      axios.get(`${WEB_API_URL}/v1/problems`, config)
+            .then((response) => {
+              this.problems = response.data;
+            }).catch(() => {
+              this.$confirm('データの取得に失敗しました．再接続しますか？', 'ネットワークエラー', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning',
+              }).then(() => {
+                this.getResponses();
+              }).catch(() => {
+                this.$message({
+                  type: 'info',
+                  message: 'Retrying canceled',
+                });
+              });
+            });
     },
   },
 };

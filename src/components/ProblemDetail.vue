@@ -30,15 +30,32 @@ export default {
     ResponseList,
   },
   created() {
-    const config = {
-      headers: { Authorization: TOKEN },
-    };
-    const problemId = this.$route.params.id;
-    axios.get(`${WEB_API_URL}/v1/problems/${problemId}`, config)
+    this.getResponses();
+  },
+  methods: {
+    getResponses() {
+      const config = {
+        headers: { Authorization: TOKEN },
+      };
+      const problemId = this.$route.params.id;
+      axios.get(`${WEB_API_URL}/v1/problems/${problemId}`, config)
             .then((response) => {
               this.problem = response.data;
             }).catch(() => {
+              this.$confirm('データの取得に失敗しました．再接続しますか？', 'ネットワークエラー', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning',
+              }).then(() => {
+                this.getResponses();
+              }).catch(() => {
+                this.$message({
+                  type: 'info',
+                  message: 'Retrying canceled',
+                });
+              });
             });
+    },
   },
 };
 </script>
