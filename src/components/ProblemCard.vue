@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card">
-    <el-badge value="返信してください！" class="item" v-if="true"></el-badge>
+    <el-badge value="返信してください！" class="item" v-if="!problem.responded"></el-badge>
     <el-badge hidden v-else ></el-badge>
     <el-row>
       <el-col :span='8'>
@@ -54,7 +54,7 @@ export default {
       let lat = 'no data';
       let lon = 'no data';
       if (this.problem.latitude !== null && this.problem.longitude !== null) {
-        lat = this.problem.latitude.toFixed(3);
+        lat = this.problem.latitude.toFied(3);
         lon = this.problem.longitude.toFixed(3);
       }
       return `lat: ${lat},  lon: ${lon} `;
