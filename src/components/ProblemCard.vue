@@ -54,7 +54,7 @@ export default {
       let lat = 'no data';
       let lon = 'no data';
       if (this.problem.latitude !== null && this.problem.longitude !== null) {
-        lat = this.problem.latitude.toFied(3);
+        lat = this.problem.latitude.toFixed(3);
         lon = this.problem.longitude.toFixed(3);
       }
       return `lat: ${lat},  lon: ${lon} `;
