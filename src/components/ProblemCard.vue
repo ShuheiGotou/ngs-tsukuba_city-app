@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <el-badge value="返信してください！" class="item" v-if="!problem.responded"></el-badge>
-    <el-badge hidden v-else ></el-badge>
+    <el-badge class="item" hidden v-else ></el-badge>
     <el-row>
       <el-col :span='8'>
         <div class="thumbnail">
