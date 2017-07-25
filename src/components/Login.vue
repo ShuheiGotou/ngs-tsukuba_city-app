@@ -9,7 +9,7 @@
               <el-input v-model="formData.email"></el-input>
             </el-form-item>
             <el-form-item label="Pass">
-              <el-input v-model="formData.password"></el-input>
+              <el-input type="password" v-model="formData.password"></el-input>
             </el-form-item>
             <el-form-item label="">
               <el-button type="primary" @click="postLoginData">send</el-button>
@@ -46,16 +46,8 @@ export default {
               console.log(window.sessionStorage.getItem('access_token'));
               router.push('/');
             }).catch(() => {
-              this.$confirm('データの取得に失敗しました．再接続しますか？', 'ネットワークエラー', {
+              this.$alert('メールアドレスまたはパスワードを確認してください', 'ログイン失敗', {
                 confirmButtonText: 'OK',
-                cancelButtonText: 'Cancel',
-                type: 'warning',
-              }).then(() => {
-              }).catch(() => {
-                this.$message({
-                  type: 'info',
-                  message: 'Retrying canceled',
-                });
               });
             });
     },

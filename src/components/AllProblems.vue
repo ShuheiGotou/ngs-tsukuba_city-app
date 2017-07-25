@@ -15,7 +15,7 @@
 <script>
 import axios from 'axios';
 import router from '../router';
-import { WEB_API_URL, TOKEN } from './../../.env';
+import { WEB_API_URL } from './../../.env';
 import ProblemCard from './ProblemCard.vue';
 
 export default {
@@ -36,8 +36,9 @@ export default {
       router.push({ name: 'problem-detail', params: { id: problem.id } });
     },
     getResponses() {
+      const token = window.sessionStorage.getItem('access_token');
       const config = {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: token },
       };
       axios.get(`${WEB_API_URL}/v1/problems`, config)
             .then((response) => {

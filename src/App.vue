@@ -14,7 +14,7 @@ export default {
     if (!hasToken) {
       router.push('login');
     } else {
-      router.push('/');
+      // router.push('/');
     }
   },
 };

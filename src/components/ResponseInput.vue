@@ -12,7 +12,7 @@
 
 <script>
 import axios from 'axios';
-import { WEB_API_URL, TOKEN } from './../../.env';
+import { WEB_API_URL } from './../../.env';
 
 export default {
   name: 'response-input',
@@ -26,8 +26,9 @@ export default {
   },
   methods: {
     postResponse() {
+      const token = window.sessionStorage.getItem('access_token');
       const config = {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: token },
       };
       const data = {
         comment: this.replyComment,
