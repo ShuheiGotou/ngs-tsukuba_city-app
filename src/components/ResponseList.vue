@@ -16,7 +16,7 @@
 
 <script>
 import axios from 'axios';
-import { WEB_API_URL, TOKEN } from '../../.env';
+import { WEB_API_URL } from '../../.env';
 
 export default {
   name: 'response-list',
@@ -30,8 +30,9 @@ export default {
   },
   methods: {
     getResponses() {
+      const token = window.sessionStorage.getItem('access_token');
       const config = {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: token },
       };
       const problemId = this.$route.params.id;
       axios.get(`${WEB_API_URL}/v1/problems/${problemId}/responses`, config)
