@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <p>login page</p>
+    <p>Login page</p>
     <el-row>
       <el-col :span='12' :offset='6'>
         <el-card class="box-card">
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios';
+import router from '../router';
 import { WEB_API_URL } from './../../.env';
 
 export default {
@@ -41,7 +42,9 @@ export default {
       console.log(this.formData.password);
       axios.post(`${WEB_API_URL}/v1/login`, this.formData)
             .then((response) => {
-              console.log(response.data);
+              window.sessionStorage.setItem('access_token', response.data.access_token);
+              console.log(window.sessionStorage.getItem('access_token'));
+              router.push('/');
             }).catch(() => {
               this.$confirm('データの取得に失敗しました．再接続しますか？', 'ネットワークエラー', {
                 confirmButtonText: 'OK',

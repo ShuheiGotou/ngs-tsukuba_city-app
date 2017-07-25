@@ -5,8 +5,18 @@
 </template>
 
 <script>
+import router from './router';
+
 export default {
   name: 'app',
+  created() {
+    const hasToken = window.sessionStorage.getItem('access_token');
+    if (!hasToken) {
+      router.push('login');
+    } else {
+      router.push('/');
+    }
+  },
 };
 </script>
 
