@@ -19,6 +19,7 @@
             <a v-bind:href="googleMapLink" target="_blank"> -> check map </a>
           </div>
           <div class="date">{{ problemDate }}</div>
+          <p>From: {{ userData.email }}</p>
         </div>
       </el-col>
     </el-row>
@@ -85,8 +86,7 @@ export default {
       };
       axios.get(`${WEB_API_URL}/v1/users/${userId}`, config)
             .then((response) => {
-              this.userId = response.data;
-              console.log(response.data);
+              this.userData = response.data;
             }).catch(() => {
               this.$confirm('データの取得に失敗しました．再接続しますか？', 'ネットワークエラー', {
                 confirmButtonText: 'OK',
