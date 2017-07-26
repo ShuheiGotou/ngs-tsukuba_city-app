@@ -26,13 +26,22 @@
 </template>
 
 <script>
-import { WEB_API_URL } from '../../.env';
+import axios from 'axios';
+import { WEB_API_URL } from './../../.env';
 
 export default {
   name: 'problem-card',
   props: [
     'problem',
   ],
+  data() {
+    return {
+      userData: {},
+    };
+  },
+  created() {
+    this.getUserData();
+  },
   computed: {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
@@ -65,6 +74,33 @@ export default {
         return `${GoogleMapLink + this.problem.latitude}+${this.problem.longitude}`;
       }
       return null;
+    },
+  },
+  methods: {
+    getUserData() {
+      const userId = this.problem.user_id;
+      const token = window.sessionStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      axios.get(`${WEB_API_URL}/v1/users/${userId}`, config)
+            .then((response) => {
+              this.userId = response.data;
+              console.log(response.data);
+            }).catch(() => {
+              this.$confirm('データの取得に失敗しました．再接続しますか？', 'ネットワークエラー', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning',
+              }).then(() => {
+                this.getResponses();
+              }).catch(() => {
+                this.$message({
+                  type: 'info',
+                  message: 'Retrying canceled',
+                });
+              });
+            });
     },
   },
 };
